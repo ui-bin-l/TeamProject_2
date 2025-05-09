@@ -28,6 +28,8 @@ using namespace std;
 #include "Objects/Circle.h"
 #include "Objects/Bullet.h"
 
+
+#include "Scenes/Scene.h"
 #include "Utilities/GameManager.h"
 extern HWND hWnd;
 extern Vector2 mousePos;
