@@ -37,5 +37,6 @@ using namespace std;
 #include "Scenes/Scene.h"
 #include "Utilities/GameManager.h"
 #include "Player/ItemManager.h"
+
 extern HWND hWnd;
 extern Vector2 mousePos;

@@ -136,6 +136,8 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Bullet.h" />
     <ClInclude Include="Objects\Circle.h" />
+    <ClInclude Include="Player\Item.h" />
+    <ClInclude Include="Player\ItemManager.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scenes\Scene.h" />
@@ -156,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="Objects\Bullet.cpp" />
     <ClCompile Include="Objects\Circle.cpp" />
+    <ClCompile Include="Player\Item.cpp" />
+    <ClCompile Include="Player\ItemManager.cpp" />
+    <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Scenes\ShootingScene.cpp" />
     <ClCompile Include="TeamProject_2.cpp" />
     <ClCompile Include="Utilities\GameManager.cpp" />
