@@ -130,9 +130,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy\Enemy.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Bullet.h" />
     <ClInclude Include="Objects\Circle.h" />
+    <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Scenes\ShootingScene.h" />
