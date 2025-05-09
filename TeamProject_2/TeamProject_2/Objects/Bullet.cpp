@@ -12,7 +12,7 @@ void Bullet::Update()
 {
 	center += direction * SPEED * DELTA;
 
-	if (center.y < 0)
+	if (center.y < 0 || center.y > SCREEN_HEIGHT || center.x < 0 || center.x > SCREEN_WIDTH)
 	{
 		isActive = false;
 	}

@@ -32,7 +32,10 @@ using namespace std;
 #include "Enemy/Enemy.h"
 #include "Enemy/EnemyManager.h"
 
+#include "Player/Item.h"
+
 #include "Scenes/Scene.h"
 #include "Utilities/GameManager.h"
+#include "Player/ItemManager.h"
 extern HWND hWnd;
 extern Vector2 mousePos;
