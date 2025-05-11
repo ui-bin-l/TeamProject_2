@@ -88,9 +88,15 @@ void Enemy::Fire()
 		}
 		if (phaseTimer < 30.0f && phaseTimer >= 5.0f)
 		{
-			for (int i = 0; i < FIRE_COUNT >> 1; i++)
+			// 플레이어 방향 벡터 구함
+			Vector2 toPlayer = player->GetCenter() - center;
+			float baseAngle = atan2(toPlayer.y, toPlayer.x); // 플레이어 향하는 각도
+
+			int halfFireCount = FIRE_COUNT / 2;
+			float stepAngle = PI * 2.0f / FIRE_COUNT;
+			for (int i = 0; i < halfFireCount; i++)
 			{
-				float angle = stepAngle * (i + 1);
+				float angle = baseAngle + stepAngle * (i - (halfFireCount - 1) / 2.0f);
 				Vector2 direction(cos(angle), sin(angle));
 				EnemyBulletManager::Get()->Fire(center, "Enemy", direction);
 			}
