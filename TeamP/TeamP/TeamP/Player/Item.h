@@ -1,6 +1,5 @@
 #pragma once
-
-class Player;
+#include "Framework.h"
 class Item : public Circle
 {
 private:
