@@ -29,8 +29,6 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
-	Timer::Get()->Update();
-	Input::Get()->Update();
 
 	scene->Update();
 
@@ -52,7 +50,6 @@ void GameManager::Render()
 void GameManager::Create()
 {
 	Timer::Get();
-	Input::Get();
 
 
 }
@@ -60,5 +57,4 @@ void GameManager::Create()
 void GameManager::Release()
 {
 	Timer::Delete();
-	Input::Delete();
 }

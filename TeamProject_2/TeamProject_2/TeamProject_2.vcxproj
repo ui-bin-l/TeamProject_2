@@ -131,7 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Enemy\Enemy.h" />
-    <ClInclude Include="Enemy\EnemyBulletManager.h" />
+    <ClInclude Include="Enemy\BulletManager.h" />
     <ClInclude Include="Enemy\EnemyManager.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Bullet.h" />
@@ -151,6 +151,7 @@
     <ClInclude Include="Utilities\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy\BulletManager.cpp" />
     <ClCompile Include="Enemy\Enemy.cpp" />
     <ClCompile Include="Enemy\EnemyBulletManager.cpp" />
     <ClCompile Include="Enemy\EnemyManager.cpp" />

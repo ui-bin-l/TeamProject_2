@@ -28,7 +28,7 @@ using namespace std;
 
 #include "Objects/Circle.h"
 #include "Objects/Bullet.h"
-#include "Enemy/EnemyBulletManager.h"
+#include "Enemy/BulletManager.h"
 #include "Player/Player.h"
 #include "Enemy/Enemy.h"
 #include "Enemy/EnemyManager.h"
@@ -36,6 +36,7 @@ using namespace std;
 #include "Player/Item.h"
 
 #include "Scenes/Scene.h"
+#include "Scenes/ShootingScene.h"
 #include "Utilities/GameManager.h"
 #include "Player/ItemManager.h"
 

@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-EnemyBulletManager::EnemyBulletManager()
+BulletManager::BulletManager()
 {
     bullets.resize(ENEMY_BULLET_POOL);
     for (Bullet*& bullet : bullets)
@@ -10,7 +10,7 @@ EnemyBulletManager::EnemyBulletManager()
     }
 }
 
-EnemyBulletManager::~EnemyBulletManager()
+BulletManager::~BulletManager()
 {
     for (Bullet*& bullet : bullets)
     {
@@ -19,7 +19,7 @@ EnemyBulletManager::~EnemyBulletManager()
     bullets.clear();
 }
 
-void EnemyBulletManager::Update()
+void BulletManager::Update()
 {
     for (Bullet*& bullet : bullets)
     {
@@ -27,7 +27,7 @@ void EnemyBulletManager::Update()
     }
 }
 
-void EnemyBulletManager::Render(HDC hdc)
+void BulletManager::Render(HDC hdc)
 {
     for (Bullet*& bullet : bullets)
     {
@@ -35,7 +35,7 @@ void EnemyBulletManager::Render(HDC hdc)
     }
 }
 
-bool EnemyBulletManager::IsCollision(Circle* circle, string tag)
+bool BulletManager::IsCollision(Circle* circle, string tag)
 {
     for (Bullet*& bullet : bullets)
     {
@@ -50,7 +50,7 @@ bool EnemyBulletManager::IsCollision(Circle* circle, string tag)
     return false;
 }
 
-void EnemyBulletManager::Fire(Vector2 pos, string tag, Vector2 direction)
+void BulletManager::Fire(Vector2 pos, string tag, Vector2 direction)
 {
     for (Bullet*& bullet : bullets)
     {

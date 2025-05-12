@@ -1,14 +1,14 @@
 #pragma once
 
-class EnemyBulletManager : public Singleton<EnemyBulletManager>
+class BulletManager : public Singleton<BulletManager>
 {
 	friend class Singleton;
 
 private:
 	const int ENEMY_BULLET_POOL = 300;
 private:
-	EnemyBulletManager();
-	~EnemyBulletManager();
+	BulletManager();
+	~BulletManager();
 public:
 	void Update();
 	void Render(HDC hdc);

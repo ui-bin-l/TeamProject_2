@@ -60,7 +60,7 @@
     <ClInclude Include="Enemy\EnemyManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyBulletManager.h">
+    <ClInclude Include="Enemy\BulletManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Player\ItemManager.h">
@@ -111,6 +111,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Player\Item.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\BulletManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
