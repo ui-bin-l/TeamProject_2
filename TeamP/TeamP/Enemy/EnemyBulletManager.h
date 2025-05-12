@@ -12,9 +12,9 @@ private:
 public:
 	void Update();
 	void Render(HDC hdc);
-	bool IsCollision(Circle* circle, string tag);
+	bool IsCollision(Circle* circle);
 
-	void Fire(Vector2 pos, string tag, Vector2 direction = Vector2::Up());
+	void Fire(Vector2 pos, Vector2 direction = Vector2::Up());
 private:
 	vector<Bullet*> bullets;
 

@@ -35,7 +35,7 @@ void EnemyBulletManager::Render(HDC hdc)
     }
 }
 
-bool EnemyBulletManager::IsCollision(Circle* circle, string tag)
+bool EnemyBulletManager::IsCollision(Circle* circle)
 {
     for (Bullet*& bullet : bullets)
     {
@@ -50,7 +50,7 @@ bool EnemyBulletManager::IsCollision(Circle* circle, string tag)
     return false;
 }
 
-void EnemyBulletManager::Fire(Vector2 pos, string tag, Vector2 direction)
+void EnemyBulletManager::Fire(Vector2 pos, Vector2 direction)
 {
     for (Bullet*& bullet : bullets)
     {

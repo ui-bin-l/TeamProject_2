@@ -41,7 +41,7 @@ void Enemy::Spawn(Vector2 pos)
 
 void Enemy::Move()
 {
-	center.y += DELTA;
+	center.y += SPEED * DELTA;
 	if (center.y > SCREEN_HEIGHT)
 	{
 		isActive = false;
@@ -60,7 +60,7 @@ void Enemy::Damaged()
 			hSelectBrush = hBlueBrush;
 		}
 	}
-	if (EnemyBulletManager::Get()->IsCollision(this, "player"))
+	if (PlayerBulletManager::Get()->IsCollision(this,"Player"))
 	{
 		hp -= 10;
 		isDamaged = true;
@@ -84,7 +84,7 @@ void Enemy::Fire()
 		if (phaseTimer < 5.0f)
 		{
 			Vector2 direction = player->GetCenter() - center;
-			EnemyBulletManager::Get()->Fire(center, "Enemy", direction);
+			EnemyBulletManager::Get()->Fire(center, direction);
 		}
 		if (phaseTimer < 30.0f && phaseTimer >= 5.0f)
 		{
@@ -98,7 +98,7 @@ void Enemy::Fire()
 			{
 				float angle = baseAngle + stepAngle * (i - (halfFireCount - 1) / 2.0f);
 				Vector2 direction(cos(angle), sin(angle));
-				EnemyBulletManager::Get()->Fire(center, "Enemy", direction);
+				EnemyBulletManager::Get()->Fire(center, direction);
 			}
 		}
 		if (phaseTimer < 60.0f && phaseTimer >= 30.0f)
@@ -107,7 +107,7 @@ void Enemy::Fire()
 			{
 				float angle = stepAngle * i;
 				Vector2 direction(cos(angle), sin(angle));
-				EnemyBulletManager::Get()->Fire(center, "Enemy", direction);
+				EnemyBulletManager::Get()->Fire(center, direction);
 			}
 		}
 
