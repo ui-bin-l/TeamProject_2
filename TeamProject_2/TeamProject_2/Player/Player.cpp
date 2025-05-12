@@ -89,7 +89,7 @@ HPEN Player::ChangePen()
 
 void Player::Fire()
 {
-	BulletManager::Get()->Fire(center);
+	BulletManager::Get()->Fire(center, "player");
 }
 
 void Player::SpecialFire()
