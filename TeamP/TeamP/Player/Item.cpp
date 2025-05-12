@@ -3,16 +3,19 @@
 
 Item::Item() :Circle(20)
 {
-	ItemType end = End;
-	int randItem = rand() % (int)end;
-	itemTag = (ItemType)randItem;
-
-	center.x = rand() % SCREEN_WIDTH;
-	center.y = rand() % SCREEN_HEIGHT;
+	itemTag = End;
 }
 
 Item::~Item()
 {
+}
+
+void Item::Spawn(Vector2 position)
+{
+	center = position;
+	isActive = true;
+	int randItem = rand() % (int)ItemType::End;
+	itemTag = (ItemType)randItem;
 }
 
 

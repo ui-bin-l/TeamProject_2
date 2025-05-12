@@ -4,13 +4,12 @@
 ItemManager::ItemManager()
 {
 	items.resize(ITEM_POOL_SIZE);
-	for (Item* item : items)
+	for (size_t i = 0; i < ITEM_POOL_SIZE; ++i)
 	{
-		item = new Item();
-		item->SetActive(true);
+		items[i] = new Item();
+		items[i]->SetActive(false);  // 기본은 비활성 상태로 시작
 	}
 }
-
 ItemManager::~ItemManager()
 {
 	for (Item* item : items)
@@ -27,23 +26,40 @@ void ItemManager::Render(HDC hdc)
 		item->Render(hdc);
 }
 
-bool ItemManager::IsCollision(Player* player)
+void ItemManager::Update()
 {
-	for (Item* item : items)
+	spawnTime += DELTA;
+	if (spawnTime > 3.0f)
 	{
-		if (!item->IsCollisionCircle(player) || !item->IsActive())
-			continue;
-		return true;
+		spawnTime = 0.0f;
+
+		for (Item* item : items)
+		{
+			if (!item->IsActive())
+			{
+				Vector2 spawnPos = { (float)(rand() % SCREEN_WIDTH), (float)(rand() % SCREEN_HEIGHT) };
+				item->Spawn(spawnPos);
+				break;
+			}
+		}
 	}
-	return false;
+
+	/*for (Item* item : items)
+	{
+		if (item->IsActive())
+			item->Update();
+	}*/
 }
+
 
 ItemType ItemManager::GetItem(Player* player)
 {
 	for (Item* item : items)
 	{
-		if (IsCollision(player))
-			return item->GetItemTag();
+		if (!item->IsCollisionCircle(player) || !item->IsActive())
+			continue;
+		item->SetActive(false);
+		return item->GetItemTag();
 	}
 	return ItemType(End);
 }

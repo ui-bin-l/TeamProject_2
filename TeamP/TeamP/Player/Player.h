@@ -42,7 +42,7 @@ private:
 
 	int healthPoint = 100;
 	int spacialGauge = 0;
-	float speed = 10.0f;
+	float speed = 1000.0f;
 	float bulletSpeed = 10.0f;
 	int bulletPower = 10;
 

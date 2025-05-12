@@ -17,14 +17,14 @@ Player::~Player()
 void Player::Update()
 {
 	Move();
-	pen = ChangePen(); //이렇게 사용이되나?
+	//pen = ChangePen(); //이렇게 사용이되나?
 	ItemGet();
 }
 
 void Player::Render(HDC hdc)
 {
 	DrawingPlayer(hdc);
-	Fire();
+
 	ShowHealthPointBar();
 	ShowSpacialGaugeBar();
 }

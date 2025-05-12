@@ -13,10 +13,10 @@ private:
 
 public:
 	void Render(HDC hdc);
-
-	bool IsCollision(Player* player);
+	void Update();
 	ItemType GetItem(Player* player);
 
 private:
 	vector<Item*> items;
+	float spawnTime = 0.0f;
 };
