@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-EnemyManger::EnemyManger()
+EnemyManager::EnemyManager()
 {
 	enemies.resize(ENEMY_POOL_SIZE);
 	for (Enemy*& enemy : enemies)
@@ -10,7 +10,7 @@ EnemyManger::EnemyManger()
 	}
 }
 
-EnemyManger::~EnemyManger()
+EnemyManager::~EnemyManager()
 {
 	for (Enemy*& enemy : enemies)
 	{
@@ -19,7 +19,7 @@ EnemyManger::~EnemyManger()
 	enemies.clear();
 }
 
-void EnemyManger::Update()
+void EnemyManager::Update()
 {
 	spawnTimer += DELTA;
 	if (spawnTimer > SPAWN_INTERVAL)
@@ -33,7 +33,7 @@ void EnemyManger::Update()
 	}
 }
 
-void EnemyManger::Render(HDC hdc)
+void EnemyManager::Render(HDC hdc)
 {
 	for (Enemy*& enemy : enemies)
 	{
@@ -41,7 +41,7 @@ void EnemyManger::Render(HDC hdc)
 	}
 }
 
-void EnemyManger::SpawnEnemy()
+void EnemyManager::SpawnEnemy()
 {
 	float spawnX = rand() % SCREEN_WIDTH;
 	for (Enemy*& enemy : enemies)
@@ -54,7 +54,7 @@ void EnemyManger::SpawnEnemy()
 	}
 }
 
-void EnemyManger::SetPlayer(Player* player)
+void EnemyManager::SetPlayer(Player* player)
 {
 	for (Enemy*& enemy : enemies)
 	{
