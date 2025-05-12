@@ -24,6 +24,7 @@ using namespace std;
 #include "Utilities/Singleton.h"
 #include "Utilities/Timer.h"
 #include "Utilities/Vector2.h"
+#include "Utilities/Enum.h"
 
 #include "Objects/Circle.h"
 #include "Objects/Bullet.h"

@@ -17,14 +17,17 @@ Player::~Player()
 void Player::Update()
 {
 	Move();
-	pen = ChangePen();
+	pen = ChangePen(); //이렇게 사용이되나?
 	ItemGet();
-	Render();
+	Render(hdc);
 }
 
-void Player::Render()
+void Player::Render(HDC hdc)
 {
-	DrawingPlayer();
+	DrawingPlayer(hdc);
+	Fire();
+	ShowHealthPointBar();
+	ShowSpacialGaugeBar();
 }
 
 void Player::Move()
@@ -47,8 +50,11 @@ void Player::Move()
 	}
 }
 
-void Player::DrawingPlayer()
+void Player::DrawingPlayer(HDC hdc)
 {
+	printf("Player Draw at (%.1f, %.1f)\n", center.x, center.y);
+
+
 	HPEN oldPen = (HPEN)SelectObject(hdc, pen);
 	Vector2 leftAndUp = { center.x - radius ,center.y - radius };
 	Vector2 rightAndDown = { center.x + radius ,center.y + radius };
@@ -77,13 +83,13 @@ void Player::DrawingPlayer()
 
 HPEN Player::ChangePen()
 {
-	// 이거 총알 닿았으면 damagePen으로 리턴하게하는거 if (IsCollisionCircle()) return damagePen; 
+	if (BulletManager::Get()->IsCollision(this, "player")) return damagePen;
 	return originalPen;
 }
 
 void Player::Fire()
 {
-	//총쏜거 구현
+	BulletManager::Get()->Fire(center);
 }
 
 void Player::SpecialFire()
@@ -97,8 +103,33 @@ void Player::SpecialFire()
 
 void Player::ItemGet()
 {
-	if (ItemManager::Get()->IsCollision(this))
+	ItemType getItem = ItemManager::Get()->GetItem(this);
+
+	switch (getItem)
 	{
-		ItemManager::Get()->RandomItem(this);
+	case PlayerSpeed:
+		speed += 5.0f * DELTA;
+		break;
+	case BulletSpeed:
+		bulletSpeed += 5.0f * DELTA;
+		break;
+	case BulletPower:
+		bulletPower += 5;
+		break;
+	case AddGun:
+		// 총 추가 구현
+		break;
+	case End:
+		break;
+	default:
+		break;
 	}
+}
+
+void Player::ShowHealthPointBar()
+{
+}
+
+void Player::ShowSpacialGaugeBar()
+{
 }
