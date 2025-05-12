@@ -43,7 +43,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_TEAMPROJECT2));
 
-    MSG msg = {};
+    MSG msg;
 
     GameManager* gameManager = new GameManager();
 

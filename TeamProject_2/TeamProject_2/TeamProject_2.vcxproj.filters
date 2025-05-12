@@ -60,6 +60,9 @@
     <ClInclude Include="Enemy\EnemyManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy\BulletManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="Player\ItemManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -67,9 +70,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\Enum.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy\BulletManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
