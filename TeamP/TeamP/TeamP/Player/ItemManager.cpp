@@ -42,8 +42,9 @@ ItemType ItemManager::GetItem(Player* player)
 {
 	for (Item* item : items)
 	{
-		if (IsCollision(player))
-			return item->GetItemTag();
+		if (!IsCollision(player))
+			continue;
+		return item->GetItemTag();
 	}
 	return ItemType(End);
 }
