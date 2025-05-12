@@ -4,7 +4,6 @@ class Enemy : public Circle
 {
 protected:
 	const int SPEED = 300;
-	const int MAX_HP = 30;
 	const float DAMAGE_INTERVAL = 0.3f;
 	const float FIRE_INTERVAL = 1.0f;
 	const int FIRE_COUNT = 10;
@@ -35,6 +34,10 @@ protected:
 	HBRUSH hRedBrush;
 	HBRUSH hBlueBrush;
 	HBRUSH hSelectBrush;
+	HBRUSH hNeonBlueBrush;
+	HBRUSH hNeonGreenBrush;
+	HBRUSH hNeonPinkBrush;
+
 protected:
 	Player* player = nullptr;
 };

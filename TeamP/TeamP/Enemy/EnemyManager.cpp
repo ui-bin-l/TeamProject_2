@@ -89,6 +89,7 @@ void EnemyManager::SpawnEnemy()
 			}
 
 			enemies[i]->SetPlayer(player);
+			enemies[i]->SetPhase(phase);
 			enemies[i]->Spawn({ (float)(rand() % SCREEN_WIDTH), 0.0f });
 			break;
 		}

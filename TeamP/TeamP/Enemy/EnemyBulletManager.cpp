@@ -57,7 +57,7 @@ void EnemyBulletManager::Fire(Vector2 pos, Vector2 direction)
         if (!bullet->IsActive())
         {
             bullet->Fire(pos, direction);
-            break;
+            break;  // 한 개의 총알만 발사
         }
     }
 }

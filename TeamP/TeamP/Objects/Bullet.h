@@ -4,7 +4,6 @@ class Bullet : public Circle
 {
 private:
 	const float SPEED = 500;
-
 public:
 	Bullet();
 	~Bullet();
@@ -20,7 +19,7 @@ public:
 
 	string GetTag() { return tag; }
 	void SetTag(string tag) { this->tag = tag; }
-
+	
 private:
 	string tag;
 	Vector2 direction = Vector2::Up();

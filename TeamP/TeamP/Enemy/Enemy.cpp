@@ -3,15 +3,18 @@
 Enemy::Enemy() : Circle(30)
 {
 	hRedBrush = CreateSolidBrush(RGB(255, 0, 0));
-	hBlueBrush = CreateSolidBrush(RGB(0, 0, 255));
+	hNeonBlueBrush = CreateSolidBrush(RGB(0, 255, 255));
+	hNeonGreenBrush = CreateSolidBrush(RGB(57, 255, 20));
+	hNeonPinkBrush = CreateSolidBrush(RGB(255, 20, 147));
 	hSelectBrush = hBlueBrush;
 }
 
 Enemy::~Enemy()
 {
 	DeleteObject(hRedBrush);
-	DeleteObject(hBlueBrush);
-
+	DeleteObject(hNeonBlueBrush);
+	DeleteObject(hNeonGreenBrush);
+	DeleteObject(hNeonPinkBrush);
 }
 
 void Enemy::Update()
@@ -20,7 +23,6 @@ void Enemy::Update()
 
 	Move();
 	Damaged();
-	
 	Fire();
 }
 
@@ -35,10 +37,23 @@ void Enemy::Render(HDC hdc)
 void Enemy::Spawn(Vector2 pos)
 {
 	center = pos;
-	hp = MAX_HP;
 	isDamaged = false;
-	hSelectBrush = hBlueBrush;
 	isActive = true;
+	switch (phase)
+	{
+	case 0:
+		hp = 30;
+		hSelectBrush = hNeonBlueBrush;
+		break;
+	case 1:
+		hp = 50;
+		hSelectBrush = hNeonGreenBrush;
+		break;
+	case 2:
+		hp = 80;
+		hSelectBrush = hNeonPinkBrush;
+		break;
+	}
 }
 
 void Enemy::Move()
@@ -59,10 +74,15 @@ void Enemy::Damaged()
 		{
 			damageTimer = 0;
 			isDamaged = false;
-			hSelectBrush = hBlueBrush;
+			switch (phase)
+			{
+			case 0: hSelectBrush = hNeonBlueBrush; break;
+			case 1: hSelectBrush = hNeonGreenBrush; break;
+			case 2: hSelectBrush = hNeonPinkBrush; break;
+			}
 		}
 	}
-	if (PlayerBulletManager::Get()->IsCollision(this,"Player"))
+	if (PlayerBulletManager::Get()->IsCollision(this, "Player"))
 	{
 		hp -= 10;
 		isDamaged = true;
@@ -76,4 +96,5 @@ void Enemy::Damaged()
 
 void Enemy::Fire()
 {
+	
 }
