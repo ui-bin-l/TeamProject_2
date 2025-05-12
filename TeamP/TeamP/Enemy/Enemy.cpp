@@ -17,8 +17,10 @@ Enemy::~Enemy()
 void Enemy::Update()
 {
 	if (!isActive) return;
+
 	Move();
 	Damaged();
+	
 	Fire();
 }
 
@@ -74,42 +76,4 @@ void Enemy::Damaged()
 
 void Enemy::Fire()
 {
-
-	phaseTimer += DELTA;
-	fireTimer += DELTA;
-	float stepAngle = PI * 2.0f / FIRE_COUNT;
-	if (fireTimer >= FIRE_INTERVAL)
-	{
-		fireTimer = 0.0f;
-		if (phaseTimer < 5.0f)
-		{
-			Vector2 direction = player->GetCenter() - center;
-			EnemyBulletManager::Get()->Fire(center, direction);
-		}
-		if (phaseTimer < 30.0f && phaseTimer >= 5.0f)
-		{
-			// 플레이어 방향 벡터 구함
-			Vector2 toPlayer = player->GetCenter() - center;
-			float baseAngle = atan2(toPlayer.y, toPlayer.x); // 플레이어 향하는 각도
-
-			int halfFireCount = FIRE_COUNT / 2;
-			float stepAngle = PI * 2.0f / FIRE_COUNT;
-			for (int i = 0; i < halfFireCount; i++)
-			{
-				float angle = baseAngle + stepAngle * (i - (halfFireCount - 1) / 2.0f);
-				Vector2 direction(cos(angle), sin(angle));
-				EnemyBulletManager::Get()->Fire(center, direction);
-			}
-		}
-		if (phaseTimer < 60.0f && phaseTimer >= 30.0f)
-		{
-			for (int i = 0; i < FIRE_COUNT; i++)
-			{
-				float angle = stepAngle * i;
-				Vector2 direction(cos(angle), sin(angle));
-				EnemyBulletManager::Get()->Fire(center, direction);
-			}
-		}
-
-	}
 }

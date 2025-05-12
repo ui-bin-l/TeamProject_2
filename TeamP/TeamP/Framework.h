@@ -33,6 +33,9 @@ using namespace std;
 #include "Player/PlayerBulletManager.h"
 #include "Player/Player.h"
 #include "Enemy/Enemy.h"
+#include "Enemy/NormalEnemy.h"
+#include "Enemy/StrongEnemy.h"
+#include "Enemy/EliteEnemy.h"
 #include "Enemy/EnemyManager.h"
 
 #include "Player/Item.h"

@@ -130,9 +130,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy\EliteEnemy.h" />
     <ClInclude Include="Enemy\Enemy.h" />
     <ClInclude Include="Enemy\EnemyBulletManager.h" />
     <ClInclude Include="Enemy\EnemyManager.h" />
+    <ClInclude Include="Enemy\NormalEnemy.h" />
+    <ClInclude Include="Enemy\StrongEnemy.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Bullet.h" />
     <ClInclude Include="Objects\Circle.h" />
@@ -153,9 +156,12 @@
     <ClInclude Include="Utilities\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy\EliteEnemy.cpp" />
     <ClCompile Include="Enemy\Enemy.cpp" />
     <ClCompile Include="Enemy\EnemyBulletManager.cpp" />
     <ClCompile Include="Enemy\EnemyManager.cpp" />
+    <ClCompile Include="Enemy\NormalEnemy.cpp" />
+    <ClCompile Include="Enemy\StrongEnemy.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
