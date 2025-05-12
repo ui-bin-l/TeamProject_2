@@ -1,5 +1,4 @@
 #include "Framework.h"
-#include "Item.h"
 
 Item::Item() :Circle(20)
 {
