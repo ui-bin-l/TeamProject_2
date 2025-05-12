@@ -7,7 +7,7 @@ ItemManager::ItemManager()
 	for (Item* item : items)
 	{
 		item = new Item();
-		item->SetActive(false);
+		item->SetActive(true);
 	}
 }
 
@@ -20,11 +20,6 @@ ItemManager::~ItemManager()
 	items.clear();
 }
 
-void ItemManager::Update()
-{
-	for (Item* item : items)
-		item->Update();
-}
 
 void ItemManager::Render(HDC hdc)
 {
@@ -43,37 +38,16 @@ bool ItemManager::IsCollision(Player* player)
 	return false;
 }
 
-void ItemManager::RandomItem(Player* player)
+ItemType ItemManager::GetItem(Player* player)
 {
 	for (Item* item : items)
 	{
-		if (!item->IsActive())
-			continue;
-		int randomNum = rand() % 4;
-		switch (randomNum)
-		{
-		case 0:
-		{
-			item->UpgradeSpeed(player);
-		}
-		break;
-		case 1:
-		{
-			item->UpgradeBulletSpeed(player);
-		}
-		break;
-		case 2:
-		{
-			item->UpgradeBulletPower(player);
-		}
-		break;
-		case 3:
-		{
-			item->AddBulletLine(player);
-		}
-		break;
-		}
-
+		if (IsCollision(player))
+			return item->GetItemTag();
 	}
+	return ItemType(End);
 }
+
+
+
 

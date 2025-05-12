@@ -12,12 +12,10 @@ private:
 	~ItemManager();
 
 public:
-	void Update();
 	void Render(HDC hdc);
 
 	bool IsCollision(Player* player);
-	void RandomItem(Player* player);
-	void ItemCreate(Vector2 pos);
+	ItemType GetItem(Player* player);
 
 private:
 	vector<Item*> items;
