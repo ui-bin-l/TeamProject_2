@@ -10,7 +10,7 @@ private:
 	const int MAX_HEALTH_POINT = 100;
 	const int BAR_HEIGHT = 10;
 	const int SPACE = 5;
-	const float DAMAGE_TIME = 0.5f;
+	const float DAMAGE_TIME = 0.3f;
 
 public:
 

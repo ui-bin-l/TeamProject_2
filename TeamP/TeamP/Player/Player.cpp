@@ -40,19 +40,19 @@ void Player::Render(HDC hdc)
 
 void Player::Move()
 {
-	if (GetAsyncKeyState(VK_LEFT) && center.x > 0)
+	if (GetAsyncKeyState(VK_LEFT) && center.x-radius > 0)
 	{
 		center.x -= DELTA * speed;
 	}
-	if (GetAsyncKeyState(VK_RIGHT) && center.x < SCREEN_WIDTH)
+	if (GetAsyncKeyState(VK_RIGHT) && center.x+radius < SCREEN_WIDTH)
 	{
 		center.x += DELTA * speed;
 	}
-	if (GetAsyncKeyState(VK_UP) && center.y > 0)
+	if (GetAsyncKeyState(VK_UP) && center.y-radius > 0)
 	{
 		center.y -= DELTA * speed;
 	}
-	if (GetAsyncKeyState(VK_DOWN) && center.y < SCREEN_HEIGHT)
+	if (GetAsyncKeyState(VK_DOWN) && center.y+radius < SCREEN_HEIGHT)
 	{
 		center.y += DELTA * speed;
 	}
@@ -249,7 +249,7 @@ void Player::Damage()
 		isDamage = false;
 		damageTime = 0.0f;
 	}
-	if (EnemyBulletManager::Get()->IsCollision(this))
+	if (EnemyBulletManager::Get()->IsCollision(this)||EnemyManager::Get()->IsCollision(this))
 	{
 		healthPoint -= 5;
 		damageTime = 0.0f;
