@@ -1,21 +1,29 @@
 #pragma once
 
+
 class PlayerBulletManager : public Singleton<PlayerBulletManager>
 {
 	friend class Singleton;
 
 private:
-	const int PLAYER_BULLET_POOL = 300;
+	const int BULLET_POOL_SIZE = 100;
+
 private:
 	PlayerBulletManager();
 	~PlayerBulletManager();
+
 public:
 	void Update();
 	void Render(HDC hdc);
-	bool IsCollision(Circle* circle, string tag);
 
-	void Fire(Vector2 pos, string tag, Vector2 direction = Vector2::Up());
+	bool IsCollision(Circle* circle);
+
+	void Fire(Vector2 pos);
+	void DownFire(Vector2 pos);
+	void CrossFire(Vector2 pos);
+	void CircleFire(Vector2 pos);
+
+
 private:
-	vector<Bullet*> bullets;
-
+	vector<PlayerBullet*> bullets;
 };

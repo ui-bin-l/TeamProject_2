@@ -82,7 +82,7 @@ void Enemy::Damaged()
 			}
 		}
 	}
-	if (PlayerBulletManager::Get()->IsCollision(this, "Player"))
+	if (PlayerBulletManager::Get()->IsCollision(this))
 	{
 		hp -= 10;
 		isDamaged = true;

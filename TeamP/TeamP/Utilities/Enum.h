@@ -4,6 +4,15 @@ enum ItemType {
 	PlayerSpeed,
 	BulletSpeed,
 	BulletPower,
-	AddGun,
+	ChangeGun,
 	End
+};
+enum BulletType {
+	UpBullet,
+	DownBullet,
+	ShotGunBullet,
+	CrossBullet,
+	CrazyBullet,
+	CircleBullet,
+	EndBullet
 };

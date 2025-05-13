@@ -139,6 +139,7 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Objects\Bullet.h" />
     <ClInclude Include="Objects\Circle.h" />
+    <ClInclude Include="Objects\PlayerBullet.h" />
     <ClInclude Include="Player\Item.h" />
     <ClInclude Include="Player\ItemManager.h" />
     <ClInclude Include="Player\Player.h" />
@@ -167,6 +168,7 @@
     </ClCompile>
     <ClCompile Include="Objects\Bullet.cpp" />
     <ClCompile Include="Objects\Circle.cpp" />
+    <ClCompile Include="Objects\PlayerBullet.cpp" />
     <ClCompile Include="Player\Item.cpp" />
     <ClCompile Include="Player\ItemManager.cpp" />
     <ClCompile Include="Player\Player.cpp" />

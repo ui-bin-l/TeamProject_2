@@ -4,7 +4,7 @@ class EnemyManager : public Singleton<EnemyManager>
 {
 	friend class Singleton;
 private:
-	const int ENEMY_POOL_SIZE = 3;
+	const int ENEMY_POOL_SIZE = 50;
 	const float SPAWN_INTERVAL = 2.0f;
 private:
 	EnemyManager();

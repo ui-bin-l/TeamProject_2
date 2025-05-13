@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "Player.h"
 
-Player::Player() :Circle(30)
+Player::Player() :Circle(15)
 {
 	center = { SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.9 };
 	originalPen = CreatePen(PS_SOLID, PEN_WIDTH, RGB(250, 200, 130));
@@ -17,8 +17,11 @@ Player::~Player()
 void Player::Update()
 {
 	Move();
-	//pen = ChangePen(); //이렇게 사용이되나?
+	//ChangePen(); //이렇게 사용이되나?
 	ItemGet();
+
+	Fire();
+
 }
 
 void Player::Render(HDC hdc)
@@ -35,15 +38,15 @@ void Player::Move()
 	{
 		center.x -= DELTA * speed;
 	}
-	else if (GetAsyncKeyState(VK_RIGHT) && center.x < SCREEN_WIDTH)
+	if (GetAsyncKeyState(VK_RIGHT) && center.x < SCREEN_WIDTH)
 	{
 		center.x += DELTA * speed;
 	}
-	else if (GetAsyncKeyState(VK_UP) && center.y > 0)
+	if (GetAsyncKeyState(VK_UP) && center.y > 0)
 	{
 		center.y -= DELTA * speed;
 	}
-	else if (GetAsyncKeyState(VK_DOWN) && center.y < SCREEN_HEIGHT)
+	if (GetAsyncKeyState(VK_DOWN) && center.y < SCREEN_HEIGHT)
 	{
 		center.y += DELTA * speed;
 	}
@@ -80,15 +83,45 @@ void Player::DrawingPlayer(HDC hdc)
 
 }
 
-HPEN Player::ChangePen()
-{
-	if (PlayerBulletManager::Get()->IsCollision(this, "player")) return damagePen;
-	return originalPen;
-}
+//void Player::ChangePen()
+//{
+//	if (BulletManager::Get()->IsCollision(this, "player"))
+//	{
+//		pen = damagePen;
+//		return;
+//	}
+//	pen = originalPen;
+//}
 
 void Player::Fire()
 {
-	PlayerBulletManager::Get()->Fire(center, "Player");
+	countFireTime += DELTA;
+	if (countFireTime < fireTime)
+		return;
+
+	switch (gunState)
+	{
+	case UpBullet:
+		PlayerBulletManager::Get()->Fire({ center.x,center.y - radius });
+		break;
+	case DownBullet:
+		PlayerBulletManager::Get()->DownFire({ center.x,center.y + radius });
+		break;
+	case ShotGunBullet:
+	case CrossBullet:
+		PlayerBulletManager::Get()->CrossFire({ center.x,center.y });
+		break;
+	case CrazyBullet:
+	case CircleBullet:
+		PlayerBulletManager::Get()->CircleFire(center);
+		break;
+
+	case EndBullet:
+	default:
+		break;
+	}
+
+	countFireTime = 0.0f;
 }
 
 void Player::SpecialFire()
@@ -107,16 +140,25 @@ void Player::ItemGet()
 	switch (getItem)
 	{
 	case PlayerSpeed:
-		speed += 5.0f * DELTA;
+		speed += 10.0f;
+		pen = damagePen;
 		break;
 	case BulletSpeed:
-		bulletSpeed += 5.0f * DELTA;
+		if (fireTime < 0.2f)
+			fireTime = 0.2f;
+		else
+		{
+			fireTime -= 0.1f;
+		}
 		break;
 	case BulletPower:
 		bulletPower += 5;
 		break;
-	case AddGun:
-		// 총 추가 구현
+	case ChangeGun:
+	{
+		int random = rand() % BulletType::EndBullet;
+		gunState = (BulletType)random; 
+	}
 		break;
 	case End:
 		break;

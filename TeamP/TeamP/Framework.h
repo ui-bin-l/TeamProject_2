@@ -29,6 +29,7 @@ using namespace std;
 
 #include "Objects/Circle.h"
 #include "Objects/Bullet.h"
+#include "Objects/PlayerBullet.h"
 #include "Enemy/EnemyBulletManager.h"
 #include "Player/PlayerBulletManager.h"
 #include "Player/Player.h"

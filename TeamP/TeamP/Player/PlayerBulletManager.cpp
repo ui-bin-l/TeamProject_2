@@ -1,63 +1,138 @@
 #include "Framework.h"
+#include "PlayerBulletManager.h"
 
 PlayerBulletManager::PlayerBulletManager()
 {
-    bullets.resize(PLAYER_BULLET_POOL);
-    for (Bullet*& bullet : bullets)
-    {
-        bullet = new Bullet;
-        bullet->SetActive(false);
-    }
+	//bullet = new Bullet();	
+
+	//Reserve
+	//bullets.reserve(BULLET_POOL_SIZE);
+	//for (int i = 0; i < BULLET_POOL_SIZE; i++)
+	//{
+	//	Bullet* bullet = new Bullet();
+	//	bullets.push_back(bullet);
+	//}
+	//Resize
+	bullets.resize(BULLET_POOL_SIZE);//Bullet* bullets[50];
+	for (PlayerBullet*& bullet : bullets)
+	{
+		bullet = new PlayerBullet();
+		bullet->SetActive(false);
+	}
 }
 
 PlayerBulletManager::~PlayerBulletManager()
 {
-    for (Bullet*& bullet : bullets)
-    {
-        delete bullet;
-    }
-    bullets.clear();
+	for (PlayerBullet*& bullet : bullets)
+	{
+		delete bullet;
+	}
+	bullets.clear();
 }
 
 void PlayerBulletManager::Update()
 {
-    for (Bullet*& bullet : bullets)
-    {
-        bullet->Update();
-    }
+	for (PlayerBullet*& bullet : bullets)
+	{
+		bullet->Update();
+	}
 }
 
 void PlayerBulletManager::Render(HDC hdc)
 {
-    for (Bullet*& bullet : bullets)
-    {
-        bullet->Render(hdc);
-    }
+	//bullet->Render(hdc);
+	for (PlayerBullet*& bullet : bullets)
+	{
+		bullet->Render(hdc);
+	}
 }
 
-bool PlayerBulletManager::IsCollision(Circle* circle, string tag)
+bool PlayerBulletManager::IsCollision(Circle* circle)
 {
-    for (Bullet*& bullet : bullets)
-    {
-        if (!bullet->IsActive())
-            continue;
-        if (!bullet->IsCollisionCircle(circle))
-            continue;
+	for (PlayerBullet*& bullet : bullets)
+	{
+		if (!bullet->IsActive())
+			continue;
+		if (!bullet->IsCollisionCircle(circle))
+			continue;
 
-        bullet->SetActive(false);
-        return true;
-    }
-    return false;
+		//다운 캐스팅
+			//Enemy* enemy = (Enemy*)(circle);
+			//enemy->Damage();
+
+		bullet->SetActive(false);
+		return true;
+	}
+
+	return false;
 }
 
-void PlayerBulletManager::Fire(Vector2 pos, string tag, Vector2 direction)
+void PlayerBulletManager::Fire(Vector2 pos)
 {
-    for (Bullet*& bullet : bullets)
-    {
-        if (!bullet->IsActive())
-        {
-            bullet->Fire(pos, direction);
-            break;
-        }
-    }
+	for (PlayerBullet*& bullet : bullets)
+	{
+		if (!bullet->IsActive())
+		{
+			bullet->Fire(pos);
+			break;
+		}
+	}
+}
+
+void PlayerBulletManager::DownFire(Vector2 pos)
+{
+	for (PlayerBullet*& bullet : bullets)
+	{
+		if (!bullet->IsActive())
+		{
+			Vector2 direction = Vector2::Down();
+			bullet->Fire(pos, direction);
+			break;
+		}
+	}
+}
+
+void PlayerBulletManager::CrossFire(Vector2 pos)
+{
+	float angleStep = 360.0f / 4; // 각 총알 간의 각도 차이
+	float degreeToRadian = 3.141592f / 180.0f;
+	int fired = 0;
+	for (PlayerBullet*& bullet : bullets)
+	{
+		if (!bullet->IsActive())
+		{
+			float angle = angleStep * fired; // 현재 총알의 발사 각도
+			float radian = angle * degreeToRadian;
+
+			Vector2 direction = Vector2(cosf(radian), sinf(radian));
+			bullet->Fire(pos, direction); // 방향을 지정해서 발사
+			fired++;
+
+			if (fired >= 4)
+				break;
+		}
+	}
+}
+
+void PlayerBulletManager::CircleFire(Vector2 pos)
+{
+	float angleStep = 360.0f / 12; // 각 총알 간의 각도 차이
+	float degreeToRadian = 3.141592f / 180.0f;
+
+	int fired = 0;
+	for (PlayerBullet*& bullet : bullets)
+	{
+		if (!bullet->IsActive())
+		{
+			float angle = angleStep * fired; // 현재 총알의 발사 각도
+			float radian = angle * degreeToRadian;
+
+			Vector2 direction = Vector2(cosf(radian), sinf(radian));
+			bullet->Fire(pos, direction); // 방향을 지정해서 발사
+			fired++;
+
+			if (fired >= 12)
+				break;
+		}
+	}
 }
