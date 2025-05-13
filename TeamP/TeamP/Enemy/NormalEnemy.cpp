@@ -1,6 +1,14 @@
 #include "Framework.h"
 #include "NormalEnemy.h"
 
+NormalEnemy::NormalEnemy()
+{
+}
+
+NormalEnemy::~NormalEnemy()
+{
+}
+
 void NormalEnemy::Fire()
 {
 	fireTimer += DELTA;

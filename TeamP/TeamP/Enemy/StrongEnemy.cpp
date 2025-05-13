@@ -1,5 +1,13 @@
 #include "Framework.h"
 
+StrongEnemy::StrongEnemy()
+{
+}
+
+StrongEnemy::~StrongEnemy()
+{
+}
+
 void StrongEnemy::Fire()
 {
 	// 플레이어 방향 벡터 구함
