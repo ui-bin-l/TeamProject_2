@@ -39,6 +39,7 @@ using namespace std;
 #include "Enemy/NormalEnemy.h"
 #include "Enemy/StrongEnemy.h"
 #include "Enemy/EliteEnemy.h"
+#include "Enemy/Boss.h"
 #include "Enemy/EnemyManager.h"
 
 #include "Player/Item.h"

@@ -16,9 +16,9 @@ public:
 	void SpawnEnemy();
 	void SetPlayer(Player* player);
 private:
-	enum class EnemyType { Normal, Strong, Elite };
+	enum class EnemyType { Normal, Strong, Elite, Boss };
 	EnemyType GetCurrentEnemyType();
-	
+
 	float spawnTimer = 0.0f;
 	float gameTimer = 0.0f;
 	float phaseTimer = 0.0f;

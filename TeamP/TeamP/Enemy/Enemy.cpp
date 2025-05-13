@@ -1,11 +1,12 @@
 #include "Framework.h"
 
-Enemy::Enemy() : Circle(30)
+Enemy::Enemy() : Circle(20)
 {
 	hRedBrush = CreateSolidBrush(RGB(255, 0, 0));
 	hNeonBlueBrush = CreateSolidBrush(RGB(0, 255, 255));
 	hNeonGreenBrush = CreateSolidBrush(RGB(57, 255, 20));
 	hNeonPinkBrush = CreateSolidBrush(RGB(255, 20, 147));
+	hNeonPurpleBrush = CreateSolidBrush(RGB(255, 0, 255));
 	hSelectBrush = hBlueBrush;
 }
 
@@ -53,6 +54,10 @@ void Enemy::Spawn(Vector2 pos)
 		hp = 80;
 		hSelectBrush = hNeonPinkBrush;
 		break;
+	case 3:
+		hp = 300;
+		hSelectBrush = hNeonPurpleBrush;
+		break;
 	}
 }
 
@@ -79,6 +84,7 @@ void Enemy::Damaged()
 			case 0: hSelectBrush = hNeonBlueBrush; break;
 			case 1: hSelectBrush = hNeonGreenBrush; break;
 			case 2: hSelectBrush = hNeonPinkBrush; break;
+			case 3: hSelectBrush = hNeonPurpleBrush; break;
 			}
 		}
 	}
@@ -96,5 +102,5 @@ void Enemy::Damaged()
 
 void Enemy::Fire()
 {
-	
+
 }

@@ -15,7 +15,7 @@ public:
 	void SetCenter(float x, float y) { center = { x, y }; }
 	void SetCenter(Vector2 center) { this->center = center; }
 	Vector2 GetCenter() { return center; }
-
+	void SetRadius(int radius) { this->radius = radius; }
 	void SetActive(bool isActive) { this->isActive = isActive; }
 	bool IsActive() { return isActive; }
 

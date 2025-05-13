@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-Bullet::Bullet() : Circle(10)
+Bullet::Bullet() : Circle(5)
 {
 }
 

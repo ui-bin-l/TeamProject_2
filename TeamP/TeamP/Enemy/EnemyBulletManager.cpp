@@ -50,14 +50,15 @@ bool EnemyBulletManager::IsCollision(Circle* circle)
     return false;
 }
 
-void EnemyBulletManager::Fire(Vector2 pos, Vector2 direction,COLORREF color)
+Bullet* EnemyBulletManager::Fire(Vector2 pos, Vector2 direction, COLORREF color)
 {
     for (Bullet*& bullet : bullets)
     {
         if (!bullet->IsActive())
         {
             bullet->Fire(pos, direction, color);
-            break;
+            return bullet;
         }
     }
+    return nullptr;
 }

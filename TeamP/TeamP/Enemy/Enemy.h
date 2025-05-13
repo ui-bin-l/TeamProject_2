@@ -3,9 +3,9 @@
 class Enemy : public Circle
 {
 protected:
-	const int SPEED = 300;
-	const float DAMAGE_INTERVAL = 0.3f;
-	const float FIRE_INTERVAL = 1.0f;
+	const int SPEED = 150;
+	const float DAMAGE_INTERVAL = 0.1f;
+	const float FIRE_INTERVAL = 0.5f;
 	const int FIRE_COUNT = 10;
 
 
@@ -19,12 +19,14 @@ public:
 	void virtual Fire() = 0;
 	void SetPlayer(Player* player) { this->player = player; }
 	void SetPhase(int phase) { this->phase = phase; }
-private:	
-	void Move();
+	void virtual Move();
+private:
+
 	void Damaged();
-	
+
 
 protected:
+	int radius = 20;
 	int hp = 0;
 	float damageTimer = 0;
 	float fireTimer = 0;
@@ -37,6 +39,7 @@ protected:
 	HBRUSH hNeonBlueBrush;
 	HBRUSH hNeonGreenBrush;
 	HBRUSH hNeonPinkBrush;
+	HBRUSH hNeonPurpleBrush;
 
 protected:
 	Player* player = nullptr;
