@@ -33,9 +33,10 @@ void ShootingScene::Update()
 
 void ShootingScene::Render(HDC hdc)
 {
-	player->Render(hdc);
+	
 	EnemyBulletManager::Get()->Render(hdc);
 	PlayerBulletManager::Get()->Render(hdc);
 	EnemyManager::Get()->Render(hdc);
 	ItemManager::Get()->Render(hdc);
+	player->Render(hdc);
 }
