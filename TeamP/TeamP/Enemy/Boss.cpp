@@ -10,25 +10,70 @@ Boss::~Boss()
 
 void Boss::Fire()
 {
+    Vector2 directions[8] =
+    {
+    { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 },
+    { 1, 1 }, { -1, 1 }, { -1, -1 }, { 1, -1 }
+    };
     float minInterval = 0.1f;
-    float fireInterval = max(minInterval, FIRE_INTERVAL - bulletTimer * 0.05f);
+    float fireInterval = max(minInterval, FIRE_INTERVAL - attackTimer * 0.01f);
     float stepAngle = PI * 2.0f / FIRE_COUNT;
     fireTimer += DELTA;
-    bulletTimer += DELTA;
+    attackTimer += DELTA;
+    bulletSpeed = SPEED + attackTimer * 5.0f;
     if (fireTimer > fireInterval)
     {
-        float bulletSpeed = SPEED + bulletTimer * 50.0f;
-        for (int i = 0; i < FIRE_COUNT; i++)
+        switch (attackPattern)
         {
-            float angle = stepAngle * i;
-            Vector2 direction(cos(angle), sin(angle));
-            Bullet* bullet = EnemyBulletManager::Get()->Fire(center, direction, RGB(255, 20, 147));
-            if (bullet != nullptr)
+        case PatternType::StraightBullet:
+            // 직선 발사 예시
+            if (fireTimer > fireInterval)
             {
-                bullet->SetSpeed(bulletSpeed);
+                Vector2 direction = player->GetCenter() - center;
+                Bullet* bullet = EnemyBulletManager::Get()->Fire(center, direction, RGB(0, 255, 255));
+                if (bullet != nullptr)
+                {
+                    bullet->SetSpeed(bulletSpeed);
+                }
+                fireTimer = 0.0f;
+            }
+            break;
+
+        case PatternType::CrossBullet:
+            // 십자 발사
+
+            if (fireTimer > fireInterval)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    Vector2 dir = directions[i];
+                    Bullet* bullet = EnemyBulletManager::Get()->Fire(center, dir, RGB(57, 255, 20));
+                    if (bullet)
+                    {
+                        bullet->SetSpeed(bulletSpeed);
+                    }
+                }
+                fireTimer = 0.0f;
+            }
+            break;
+
+        case PatternType::SpreadBullet:
+            // 확산 발사
+            if (fireTimer > fireInterval)
+            {
+                for (int i = 0; i < FIRE_COUNT * 2; i++)
+                {
+                    float angle = stepAngle * i / 2;
+                    Vector2 direction(cos(angle), sin(angle));
+                    Bullet* bullet = EnemyBulletManager::Get()->Fire(center, direction, RGB(255, 20, 147));
+                    if (bullet != nullptr)
+                    {
+                        bullet->SetSpeed(bulletSpeed);
+                    }
+                }
+                fireTimer = 0.0f;
             }
         }
-        fireTimer = 0.0f;
     }
 }
 
@@ -63,4 +108,33 @@ void Boss::Move()
     {
         isActive = false;
     }
+}
+
+void Boss::ChangePattern()
+{
+    bulletTimer += DELTA;
+    if (bulletTimer > 5.0f)
+    {
+        int patternChange = rand() % 3; // 0, 1, 2 중 하나의 패턴으로 변경
+        bulletTimer = 0.0f; // 리셋
+        switch (patternChange)
+        {
+        case 0:
+            attackPattern = PatternType::CrossBullet;
+            break;
+        case 1:
+            attackPattern = PatternType::SpreadBullet;
+            break;
+        case 2:
+            attackPattern = PatternType::StraightBullet;
+            break;
+        }
+    }
+}
+
+void Boss::Update()
+{
+    Move();
+    Fire();
+    ChangePattern();
 }

@@ -13,7 +13,7 @@ public:
 	Enemy();
 	~Enemy();
 
-	void Update();
+	void virtual Update();
 	void Render(HDC hdc);
 	void Spawn(Vector2 pos);
 	void virtual Fire() = 0;
