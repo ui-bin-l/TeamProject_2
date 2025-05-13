@@ -18,6 +18,9 @@ public:
 		center = pos;
 	}
 
+	void Render(HDC hdc);
+
 private:
 	Vector2 direction = Vector2::Up();
+	HBRUSH hBrush;
 };

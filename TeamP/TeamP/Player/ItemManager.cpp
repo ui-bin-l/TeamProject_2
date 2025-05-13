@@ -29,7 +29,7 @@ void ItemManager::Render(HDC hdc)
 void ItemManager::Update()
 {
 	spawnTime += DELTA;
-	if (spawnTime > 3.0f)
+	if (spawnTime > SPAWN_TIME)
 	{
 		spawnTime = 0.0f;
 

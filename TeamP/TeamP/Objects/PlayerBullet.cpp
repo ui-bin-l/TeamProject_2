@@ -1,7 +1,8 @@
 #include "Framework.h"
 
-PlayerBullet::PlayerBullet() : Circle(5)
+PlayerBullet::PlayerBullet() : Circle(7)
 {
+	hBrush = CreateSolidBrush(RGB(0, 191, 255));
 }
 
 PlayerBullet::~PlayerBullet()
@@ -16,4 +17,11 @@ void PlayerBullet::Update()
 	{
 		isActive = false;
 	}
+}
+
+void PlayerBullet::Render(HDC hdc)
+{
+	HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+	Circle::Render(hdc);
+	SelectObject(hdc, oldBrush);
 }

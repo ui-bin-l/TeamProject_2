@@ -4,7 +4,14 @@
 Player::Player() :Circle(15)
 {
 	center = { SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.9 };
-	pen = CreatePen(PS_SOLID, PEN_WIDTH, RGB(255, 165, 100));
+	originalPen = CreatePen(PS_SOLID, PEN_WIDTH, RGB(255, 165, 100));
+	damagePen = CreatePen(PS_SOLID, PEN_WIDTH, RGB(200, 0, 150));
+	pen = originalPen;
+
+	barColor[0] = CreateSolidBrush(RGB(0, 201, 87));
+	barColor[1] = CreateSolidBrush(RGB(255, 193, 37));
+	barColor[2] = CreateSolidBrush(RGB(255, 69, 0));
+	hBrush = barColor[0];
 }
 
 Player::~Player()
@@ -18,14 +25,17 @@ void Player::Update()
 	ItemGet();
 
 	Fire();
-
+	if (isGetItem)
+		printTime += DELTA;
+	Damage();
+	ChangePen();
 }
 
 void Player::Render(HDC hdc)
 {
 	DrawingPlayer(hdc);
-
-	ShowHealthPointBar();
+	PrintItemName(hdc);
+	ShowHealthPointBar(hdc);
 }
 
 void Player::Move()
@@ -79,15 +89,15 @@ void Player::DrawingPlayer(HDC hdc)
 
 }
 
-//void Player::ChangePen()
-//{
-//	if (BulletManager::Get()->IsCollision(this, "player"))
-//	{
-//		pen = damagePen;
-//		return;
-//	}
-//	pen = originalPen;
-//}
+void Player::ChangePen()
+{
+	if (isDamage)
+	{
+		pen = damagePen;
+		return;
+	}
+	pen = originalPen;
+}
 
 void Player::Fire()
 {
@@ -140,9 +150,15 @@ void Player::ItemGet()
 	switch (getItem)
 	{
 	case PlayerSpeed:
+		getItemName = L"¿Ãµøº”µµ ¡ı∞° æ∆¿Ã≈€ »πµÊ!";
+		isGetItem = true;
+		printTime = 0.0f;
 		speed += 10.0f;
 		break;
 	case BulletSpeed:
+		getItemName = L"√—æÀ º”µµ ¡ı∞° æ∆¿Ã≈€ »πµÊ!";
+		isGetItem = true;
+		printTime = 0.0f;
 		if (fireTime < 0.2f)
 			fireTime = 0.2f;
 		else
@@ -151,14 +167,20 @@ void Player::ItemGet()
 		}
 		break;
 	case BulletPower:
+		getItemName = L"√—æÀ ∆ƒøˆ ¡ı∞° æ∆¿Ã≈€ »πµÊ!";
+		isGetItem = true;
+		printTime = 0.0f;
 		bulletPower += 5;
 		break;
 	case ChangeGun:
 	{
+		getItemName = L"√— ∫Ø∞Ê æ∆¿Ã≈€ »πµÊ!";
+		isGetItem = true;
+		printTime = 0.0f;
 		int random = rand() % BulletType::EndBullet;
-		gunState = (BulletType)random; 
+		gunState = (BulletType)random;
 	}
-		break;
+	break;
 	case End:
 		break;
 	default:
@@ -166,7 +188,76 @@ void Player::ItemGet()
 	}
 }
 
-void Player::ShowHealthPointBar()
+void Player::ShowHealthPointBar(HDC hdc)
 {
+	Vector2 hpBar = { center.x , center.y + SPACE };
+
+	MoveToEx(hdc, hpBar.x - radius, hpBar.y + radius, nullptr);
+	LineTo(hdc, hpBar.x + radius, hpBar.y + radius);
+
+	MoveToEx(hdc, hpBar.x + radius, hpBar.y + radius, nullptr);
+	LineTo(hdc, hpBar.x + radius, hpBar.y + radius + BAR_HEIGHT);
+
+	MoveToEx(hdc, hpBar.x - radius, hpBar.y + radius + BAR_HEIGHT, nullptr);
+	LineTo(hdc, hpBar.x + radius, hpBar.y + radius + BAR_HEIGHT);
+
+
+	MoveToEx(hdc, hpBar.x - radius, hpBar.y + radius, nullptr);
+	LineTo(hdc, hpBar.x - radius, hpBar.y + radius + BAR_HEIGHT);
+
+	HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+	Rectangle(hdc, hpBar.x - radius, hpBar.y + radius, ChangeHp() + hpBar.x - radius, hpBar.y + radius + BAR_HEIGHT);
+	SelectObject(hdc, oldBrush);
+}
+
+void Player::PrintItemName(HDC hdc)
+{
+	if (!isGetItem)
+		return;
+	if (printTime >= PRINT_TIME)
+	{
+		isGetItem = false;
+	}
+	else
+	{
+		COLORREF oldText = SetTextColor(hdc, RGB(10, 186, 181));
+		TextOut(hdc, (int)(SCREEN_WIDTH * 0.3f), (int)(SCREEN_HEIGHT * 0.2f),
+			getItemName.c_str(), getItemName.length());
+		SetTextColor(hdc, oldText);
+	}
+}
+
+int Player::ChangeHp()
+{
+	float ratio = (float)healthPoint / MAX_HEALTH_POINT;
+
+	if (ratio > 0.6f)
+		hBrush = barColor[0];    // ø°∏ﬁ∂ˆµÂ ±◊∏∞
+	else if (ratio > 0.3f)
+		hBrush = barColor[1];      // ∞ÒµÁ øª∑ŒøÏ
+	else
+		hBrush = barColor[2];   // ø¿∑ª¡ˆ ∑πµÂ
+
+	return ratio * radius * 2;
+}
+
+void Player::Damage()
+{
+	damageTime += DELTA;
+	if (damageTime >= DAMAGE_TIME)
+	{
+		isDamage = false;
+		damageTime = 0.0f;
+	}
+	if (EnemyBulletManager::Get()->IsCollision(this))
+	{
+		healthPoint -= 5;
+		damageTime = 0.0f;
+		isDamage = true;
+	}
+
+	if (healthPoint <= 0)
+		//∞‘¿”≥°
+		healthPoint = 0;
 }
 
