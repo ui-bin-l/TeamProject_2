@@ -16,7 +16,6 @@ void Item::Spawn(Vector2 position)
 	isActive = true;
 	int randItem = rand() % (int)ItemType::End;
 	itemTag = (ItemType)randItem;
-	itemTag = ChangeGun;
 }
 
 

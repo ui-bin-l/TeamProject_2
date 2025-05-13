@@ -4,20 +4,17 @@
 Player::Player() :Circle(15)
 {
 	center = { SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.9 };
-	originalPen = CreatePen(PS_SOLID, PEN_WIDTH, RGB(250, 200, 130));
-	damagePen = CreatePen(PS_SOLID, PEN_WIDTH, RGB(250, 100, 100));
+	pen = CreatePen(PS_SOLID, PEN_WIDTH, RGB(255, 165, 100));
 }
 
 Player::~Player()
 {
-	DeleteObject(originalPen);
-	DeleteObject(damagePen);
+	DeleteObject(pen);
 }
 
 void Player::Update()
 {
 	Move();
-	//ChangePen(); //이렇게 사용이되나?
 	ItemGet();
 
 	Fire();
@@ -29,7 +26,6 @@ void Player::Render(HDC hdc)
 	DrawingPlayer(hdc);
 
 	ShowHealthPointBar();
-	ShowSpacialGaugeBar();
 }
 
 void Player::Move()
@@ -145,7 +141,6 @@ void Player::ItemGet()
 	{
 	case PlayerSpeed:
 		speed += 10.0f;
-		pen = damagePen;
 		break;
 	case BulletSpeed:
 		if (fireTime < 0.2f)
@@ -175,6 +170,3 @@ void Player::ShowHealthPointBar()
 {
 }
 
-void Player::ShowSpacialGaugeBar()
-{
-}

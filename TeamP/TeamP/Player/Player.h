@@ -1,10 +1,9 @@
 #pragma once
 
-// 할일 : Fire()완성하기!!!! + 궁극기 구현하기 (개쎈 레이저 쏘자) + 체력, 궁극기 게이지바 만들기 
+// 할일 : Fire()완성하기!!!! + 색깔입히기~ + 체력 게이지바 만들기 + 충돌처리하기
 class Player : public Circle
 {
 private:
-	const float MAX_SPEED = 100.0f; // 안썼음이거
 	const int PEN_WIDTH = 5;
 	const int MAX_SPACIAL_GAUGE = 10;
 
@@ -35,7 +34,6 @@ public:
 	void ItemGet(); // 아이템 닿으면 능력치 조정하기
 
 	void ShowHealthPointBar(); // 체력바 보이기
-	void ShowSpacialGaugeBar(); // 궁극기바 보이기
 
 
 private:
@@ -49,8 +47,6 @@ private:
 	float fireTime = 0.5f;
 
 	HPEN pen;
-	HPEN originalPen;
-	HPEN damagePen;
 
-	BulletType gunState = CrossBullet;
+	BulletType gunState = UpBullet;
 };
