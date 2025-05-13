@@ -6,6 +6,8 @@
 #define SCREEN_WIDTH 600
 #define SCREEN_HEIGHT 800
 
+#define FULL_ANGLE 360.0f
+#define HALF_ANGLE 180.0f
 #define PI 3.141592f
 
 #define DELTA Timer::Get()->GetElapsedTime()

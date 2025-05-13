@@ -22,8 +22,12 @@ public:
 	void DownFire(Vector2 pos);
 	void CrossFire(Vector2 pos);
 	void CircleFire(Vector2 pos);
+	void CrazyFire(Vector2 pos);
+	void ShotGunFire(Vector2 pos);
 
 
 private:
+	int bulletCount = 0;
+
 	vector<PlayerBullet*> bullets;
 };
