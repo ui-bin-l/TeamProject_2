@@ -90,7 +90,7 @@ void Enemy::Damaged()
 	}
 	if (PlayerBulletManager::Get()->IsCollision(this))
 	{
-		hp -= 10;
+		hp -= player->GetBulletPower();
 		isDamaged = true;
 		hSelectBrush = hRedBrush;
 		if (hp <= 0)
