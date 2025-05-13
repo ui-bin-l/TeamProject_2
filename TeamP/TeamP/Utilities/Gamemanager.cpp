@@ -14,7 +14,7 @@ GameManager::GameManager()
 
 	SCENE->AddScene("Title", new TitleScene());
 	SCENE->AddScene("Game", new ShootingScene());
-
+	SCENE->AddScene("Victory", new VictoryScene());
 	SCENE->ChangeScene("Title");
 }
 

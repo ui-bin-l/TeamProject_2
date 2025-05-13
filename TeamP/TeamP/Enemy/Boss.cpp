@@ -2,7 +2,7 @@
 
 Boss::Boss()
 {
-	SetRadius(60);
+    SetRadius(60);
 }
 
 Boss::~Boss()
@@ -173,13 +173,15 @@ void Boss::ChangePattern()
 
 void Boss::Update()
 {
-	if (!IsActive()) return;
+    if (!IsActive()) return;
     Move();
     Fire();
     ChangePattern();
     Damaged();
-	if (hp <= 0)
-	{
-		isActive = false;
-	}   
+    if (hp <= 0)
+    {
+        isActive = false;
+        SceneManager::Get()->ChangeScene("Victory");
+    }
+
 }
