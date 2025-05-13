@@ -20,11 +20,7 @@ public:
 	void SetPlayer(Player* player) { this->player = player; }
 	void SetPhase(int phase) { this->phase = phase; }
 	void virtual Move();
-private:
-
 	void Damaged();
-
-
 protected:
 	int radius = 20;
 	int hp = 0;

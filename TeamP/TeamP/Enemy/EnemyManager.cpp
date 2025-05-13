@@ -107,6 +107,7 @@ void EnemyManager::SpawnEnemy()
 			{
 			case EnemyType::Normal:
 				enemies[i] = new NormalEnemy();
+
 				break;
 			case EnemyType::Strong:
 				enemies[i] = new StrongEnemy();
@@ -117,6 +118,7 @@ void EnemyManager::SpawnEnemy()
 			case EnemyType::Boss:
 				enemies[i] = new Boss();
 				enemies[i]->SetRadius(60);
+				enemies[i]->SetPlayer(player);
 				enemies[i]->Spawn({ (float)(SCREEN_WIDTH / 2), 0.0f });
 				break;
 			}
