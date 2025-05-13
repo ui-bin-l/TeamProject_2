@@ -55,7 +55,7 @@ void Enemy::Spawn(Vector2 pos)
 		hSelectBrush = hNeonPinkBrush;
 		break;
 	case 3:
-		hp = 300;
+		hp = 100;
 		hSelectBrush = hNeonPurpleBrush;
 		break;
 	}

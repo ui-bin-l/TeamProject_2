@@ -173,8 +173,13 @@ void Boss::ChangePattern()
 
 void Boss::Update()
 {
+	if (!IsActive()) return;
     Move();
     Fire();
     ChangePattern();
     Damaged();
+	if (hp <= 0)
+	{
+		isActive = false;
+	}   
 }

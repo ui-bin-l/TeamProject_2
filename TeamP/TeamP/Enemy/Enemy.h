@@ -3,7 +3,7 @@
 class Enemy : public Circle
 {
 protected:
-	const int SPEED = 150;
+	const int SPEED = 80;
 	const float DAMAGE_INTERVAL = 0.1f;
 	const float FIRE_INTERVAL = 0.5f;
 	const int FIRE_COUNT = 10;

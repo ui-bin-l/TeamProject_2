@@ -3,7 +3,7 @@
 class Bullet : public Circle
 {
 private:
-	float SPEED = 500;
+	float SPEED = 200;
 	COLORREF color = RGB(255, 255, 255);
 public:
 	Bullet();
