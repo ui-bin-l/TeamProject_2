@@ -137,3 +137,16 @@ void EnemyManager::SetPlayer(Player* player)
 		enemy->SetPlayer(player);
 	}
 }
+
+bool EnemyManager::IsCollision(Player* player)
+{
+	for (Enemy*& enemy : enemies)
+	{
+		if (!enemy->IsActive())
+			continue;
+		if (!enemy->IsCollisionCircle(player))
+			continue;
+		return true;
+	}
+	return false;
+}

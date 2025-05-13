@@ -249,7 +249,7 @@ void Player::Damage()
 		isDamage = false;
 		damageTime = 0.0f;
 	}
-	if (EnemyBulletManager::Get()->IsCollision(this))
+	if (EnemyBulletManager::Get()->IsCollision(this)||EnemyManager::Get()->IsCollision(this))
 	{
 		healthPoint -= 5;
 		damageTime = 0.0f;

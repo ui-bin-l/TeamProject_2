@@ -15,6 +15,9 @@ public:
 
 	void SpawnEnemy();
 	void SetPlayer(Player* player);
+
+	bool IsCollision(Player* player);
+
 private:
 	enum class EnemyType { Normal, Strong, Elite, Boss };
 	EnemyType GetCurrentEnemyType();
