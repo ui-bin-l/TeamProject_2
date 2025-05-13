@@ -249,15 +249,21 @@ void Player::Damage()
 		isDamage = false;
 		damageTime = 0.0f;
 	}
-	if (EnemyBulletManager::Get()->IsCollision(this)||EnemyManager::Get()->IsCollision(this))
+	if (EnemyBulletManager::Get()->IsCollision(this))
 	{
-		healthPoint -= 5;
+		healthPoint -= 50;
+		damageTime = 0.0f;
+		isDamage = true;
+	}
+	else if (EnemyManager::Get()->IsCollision(this))
+	{
+		healthPoint -= 1;
 		damageTime = 0.0f;
 		isDamage = true;
 	}
 
 	if (healthPoint <= 0)
-		//°ÔÀÓ³¡
-		healthPoint = 0;
+		SceneManager::Get()->ChangeScene("GameOver");
+		
 }
 

@@ -7,7 +7,7 @@ private:
 	const int PEN_WIDTH = 5;
 	const int MAX_SPACIAL_GAUGE = 10;
 	const float PRINT_TIME = 3.0f;
-	const int MAX_HEALTH_POINT = 100;
+	const int MAX_HEALTH_POINT = 10000;
 	const int BAR_HEIGHT = 10;
 	const int SPACE = 5;
 	const float DAMAGE_TIME = 0.3f;
@@ -48,7 +48,7 @@ public:
 
 private:
 
-	int healthPoint = 100;
+	int healthPoint = 10000;
 	int spacialGauge = 0;
 	float speed = 1000.0f;
 	int bulletPower = 10;

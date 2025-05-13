@@ -48,6 +48,7 @@ using namespace std;
 #include "Scenes/SceneManager.h"
 #include "Scenes/TitleScene.h"
 #include "Scenes/VictoryScene.h"
+#include "Scenes/GameOverScene.h"	
 #include "Utilities/GameManager.h"
 #include "Player/ItemManager.h"
 
