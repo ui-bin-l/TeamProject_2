@@ -11,7 +11,7 @@
 #define PI 3.141592f
 
 #define DELTA Timer::Get()->GetElapsedTime()
-
+#define SCENE SceneManager::Get()
 #include <windows.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -45,6 +45,8 @@ using namespace std;
 #include "Player/Item.h"
 
 #include "Scenes/Scene.h"
+#include "Scenes/SceneManager.h"
+#include "Scenes/TitleScene.h"
 #include "Utilities/GameManager.h"
 #include "Player/ItemManager.h"
 
