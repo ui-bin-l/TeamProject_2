@@ -5,7 +5,7 @@ class ItemManager : public Singleton<ItemManager>
 	friend class Singleton;
 
 private:
-	const float SPAWN_TIME = 10.0f;
+	const float SPAWN_TIME = 5.0f;
 	const int ITEM_POOL_SIZE = 10;
 
 private:
