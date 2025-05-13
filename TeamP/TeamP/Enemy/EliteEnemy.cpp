@@ -1,6 +1,14 @@
 #include "Framework.h"
 #include "EliteEnemy.h"
 
+EliteEnemy::EliteEnemy()
+{
+}
+
+EliteEnemy::~EliteEnemy()
+{
+}
+
 void EliteEnemy::Fire()
 {
 	float stepAngle = PI * 2.0f / FIRE_COUNT;

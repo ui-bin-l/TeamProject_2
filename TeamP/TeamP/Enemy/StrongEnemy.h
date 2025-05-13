@@ -3,8 +3,8 @@
 class StrongEnemy : public Enemy
 {
 public:
-    StrongEnemy() {}
-    ~StrongEnemy() {}
+    StrongEnemy();
+    ~StrongEnemy();
 
     void Fire() override;
 };

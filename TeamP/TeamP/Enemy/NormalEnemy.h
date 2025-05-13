@@ -3,8 +3,8 @@
 class NormalEnemy : public Enemy
 {
 public:
-    NormalEnemy() {}
-    ~NormalEnemy() {}
+    NormalEnemy();
+    ~NormalEnemy();
 
     void Fire() override;
 };

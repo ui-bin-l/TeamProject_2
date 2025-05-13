@@ -3,8 +3,8 @@
 class EliteEnemy : public Enemy
 {
 public:
-    EliteEnemy() = default;
-    ~EliteEnemy() = default;
+    EliteEnemy();
+    ~EliteEnemy();
 
     void Fire() override;
 };
