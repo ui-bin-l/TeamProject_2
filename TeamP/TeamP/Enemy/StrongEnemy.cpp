@@ -15,7 +15,7 @@ void StrongEnemy::Fire()
 		{
 			float angle = baseAngle + stepAngle * (i - (halfFireCount - 1) / 2.0f);
 			Vector2 direction(cos(angle), sin(angle));
-			EnemyBulletManager::Get()->Fire(center, direction);
+			EnemyBulletManager::Get()->Fire(center, direction,RGB(57, 255, 20));
 		}
 		fireTimer = 0.0f;
 	}

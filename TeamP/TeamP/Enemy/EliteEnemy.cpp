@@ -11,7 +11,7 @@ void EliteEnemy::Fire()
 		{
 			float angle = stepAngle * i;
 			Vector2 direction(cos(angle), sin(angle));
-			EnemyBulletManager::Get()->Fire(center, direction);
+			EnemyBulletManager::Get()->Fire(center, direction,RGB(255, 20, 147));
 		}
 		fireTimer = 0.0f;
 	}

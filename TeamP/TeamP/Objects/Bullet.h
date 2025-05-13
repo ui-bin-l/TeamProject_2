@@ -4,15 +4,17 @@ class Bullet : public Circle
 {
 private:
 	const float SPEED = 500;
+	COLORREF color = RGB(255, 255, 255);
 public:
 	Bullet();
 	~Bullet();
 
 	void Update();
-
-	void Fire(Vector2 pos, Vector2 direction = Vector2::Up())
+	void Render(HDC hdc);
+	void Fire(Vector2 pos, Vector2 direction = Vector2::Up(),COLORREF color = RGB(255,255,255))
 	{
 		this->direction = direction.GetNormalized();
+		this->color = color;
 		isActive = true;
 		center = pos;
 	}
