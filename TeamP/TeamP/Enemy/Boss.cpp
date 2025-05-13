@@ -2,6 +2,7 @@
 
 Boss::Boss()
 {
+	SetRadius(60);
 }
 
 Boss::~Boss()
@@ -175,4 +176,5 @@ void Boss::Update()
     Move();
     Fire();
     ChangePattern();
+    Damaged();
 }
