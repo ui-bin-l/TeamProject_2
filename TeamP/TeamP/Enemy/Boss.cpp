@@ -73,7 +73,36 @@ void Boss::Fire()
                 }
                 fireTimer = 0.0f;
             }
+        case PatternType::HalfCircleBullet:
+        {
+            if (fireTimer > fireInterval)
+            {
+                Vector2 toPlayer = player->GetCenter() - center;
+                float baseAngle = atan2(toPlayer.y, toPlayer.x); // 플레이어 향하는 각도
+
+                int halfFireCount = FIRE_COUNT / 2;
+                float stepAngle = PI / (FIRE_COUNT * 1.5f);
+                fireTimer += DELTA;
+                if (fireTimer > FIRE_INTERVAL)
+                {
+                    for (int i = 0; i < halfFireCount; i++)
+                    {
+                        float angle = baseAngle + stepAngle * (i - (halfFireCount - 1) / 2.0f);
+                        Vector2 direction(cos(angle), sin(angle));
+                        Bullet* bullet = EnemyBulletManager::Get()->Fire(center, direction, RGB(57, 255, 20));
+                        if (bullet != nullptr)
+                        {
+                            bullet->SetSpeed(bulletSpeed);
+                        }
+                    }
+
+                    fireTimer = 0.0f;
+                }
+            }
         }
+        }
+
+
     }
 }
 
@@ -97,8 +126,14 @@ void Boss::Move()
         center.x += xDirection * xSpeed * DELTA;
 
         // 화면 경계 도달 시 방향 반전
-        if (center.x <= radius || center.x >= SCREEN_WIDTH - radius)
+        if (center.x <= radius)
         {
+            center.x = radius;
+            xDirection *= -1.0f;
+        }
+        else if (center.x >= SCREEN_WIDTH - radius)
+        {
+            center.x = SCREEN_WIDTH - radius;
             xDirection *= -1.0f;
         }
     }
@@ -115,7 +150,7 @@ void Boss::ChangePattern()
     bulletTimer += DELTA;
     if (bulletTimer > 5.0f)
     {
-        int patternChange = rand() % 3; // 0, 1, 2 중 하나의 패턴으로 변경
+        int patternChange = rand() % 4; // 0, 1, 2 중 하나의 패턴으로 변경
         bulletTimer = 0.0f; // 리셋
         switch (patternChange)
         {
@@ -127,6 +162,9 @@ void Boss::ChangePattern()
             break;
         case 2:
             attackPattern = PatternType::StraightBullet;
+            break;
+        case 3:
+            attackPattern = PatternType::HalfCircleBullet;
             break;
         }
     }

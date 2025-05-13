@@ -8,6 +8,7 @@ private:
 		StraightBullet,
 		CrossBullet,
 		SpreadBullet,
+		HalfCircleBullet,
 
 	};
 
