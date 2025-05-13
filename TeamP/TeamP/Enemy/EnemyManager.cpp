@@ -24,9 +24,9 @@ void EnemyManager::Update()
 	gameTimer += DELTA;
 	spawnTimer += DELTA;
 	phaseTimer += DELTA;
-	if (phaseTimer >= 20.0f)
+	if (phaseTimer >= 10.0f)
 		phase = 2;
-	else if (phaseTimer >= 10.0f)
+	else if (phaseTimer >= 5.0f)
 		phase = 1;
 	else
 		phase = 0;
@@ -51,11 +51,11 @@ void EnemyManager::Render(HDC hdc)
 }
 EnemyManager::EnemyType EnemyManager::GetCurrentEnemyType()
 {
-	if (gameTimer >= 20.0f)
+	if (gameTimer >= 10.0f)
 	{
 		return EnemyType::Elite;
 	}
-	else if (gameTimer >= 10.0f)
+	else if (gameTimer >= 5.0f)
 	{
 		return EnemyType::Strong;
 	}
